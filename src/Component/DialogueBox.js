@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const WebSocketComponent = () => {
-  const [words, setWords] = useState([]);
+  const [words, setWords] = useState('');
   const [socket, setSocket] = useState(null);
   const [showDialog, setShowDialog] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -23,7 +23,7 @@ const WebSocketComponent = () => {
         const newProgress = parseInt(message['count'] * 100);
         console.log(message['word']);
         console.log(newProgress);
-        setWords((prevWords) => [...prevWords, newWord]);
+        setWords(newWord); // Set the new word received from WebSocket
         setProgress(newProgress);
         if (newProgress === 100) {
           setTimeout(() => {
@@ -46,7 +46,7 @@ const WebSocketComponent = () => {
   const handleButtonClick = () => {
     setShowDialog(true);
     connectToWebSocket();
-    setWords([]);
+    setWords(''); // Reset the word to an empty string when the button is clicked again
     setProgress(0); // Reset progress to 0 when the button is clicked again
   };
 
@@ -82,9 +82,7 @@ const WebSocketComponent = () => {
               <div className="modal-body">
                 <p>Progress: {progress}%</p>
                 <ul>
-                  {words.map((word, index) => (
-                    <li key={index}>{word}</li>
-                  ))}
+                  {words && <li>{words}</li>}
                 </ul>
               </div>
               <div className="modal-footer">
