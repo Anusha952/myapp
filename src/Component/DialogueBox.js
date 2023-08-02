@@ -59,7 +59,7 @@ const WebSocketComponent = () => {
 
   return (
     <div>
-      <button onClick={handleButtonClick}>Connect to WebSocket</button>
+      <button className="btn btn-primary" onClick={handleButtonClick}>Connect to WebSocket</button>
       {showDialog && (
         <div
           className="modal"
@@ -81,9 +81,7 @@ const WebSocketComponent = () => {
               </div>
               <div className="modal-body">
                 <p>Progress: {progress}%</p>
-                <ul>
-                  {words && <li>{words}</li>}
-                </ul>
+                {words && <p>{words}</p>}
               </div>
               <div className="modal-footer">
                 <button
